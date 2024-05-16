@@ -1,0 +1,65 @@
+﻿@model WebApplication3.Models.Author
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1 style="font-size: 50px; color: antiquewhite; text-shadow: 7px 7px #000000; font-weight: bold;">Details</h1>
+
+
+<div style="background-color:antiquewhite; padding:20px">
+    
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.FirstName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.LastName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.BirthDate)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.BirthDate)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Nationality)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Nationality)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Gender)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Gender)
+        </dd>
+        <dt class="col-sm-2 ">
+            @Html.DisplayNameFor(model => model.Books)
+        </dt>
+        <dd class="col-sm-10">
+            @foreach (var book in Model.Books)
+            {
+                <li>@book.Title</li>
+            }
+        </dd>
+    </dl>
+</div>
+
+<div style="background-color:antiquewhite; padding:20px">
+     <a asp-action="Index" style="border-radius: 5px; text-align: center; background-color: antiquewhite; color: saddlebrown; font-size: 17px; width: 150px; height: 40px;">Back to List</a>
+</div>
+@if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+{
+    <div class="card-body" style="border-radius: 5px; text-align: center; background-color: antiquewhite; color: saddlebrown; font-size: 17px; width: 150px; height: 40px; border-block:medium; margin-left:100px">
+        <a asp-action="Edit" asp-route-id="@Model?.Id" style="border-radius: 5px; text-align: center; background-color: antiquewhite; color: saddlebrown; font-size: 17px; width: 150px; height: 40px;">Edit</a>
+        <a asp-action="Delete" asp-route-id="@Model?.Id" style="border-radius: 5px; text-align: center; background-color: antiquewhite; color: saddlebrown; font-size: 17px; width: 150px; height: 40px;">Delete</a>
+    </div>
+}

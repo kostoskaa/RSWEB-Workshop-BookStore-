@@ -1,0 +1,60 @@
+﻿@model IEnumerable<WebApplication3.Models.Author>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1 style="font-size: 50px; color: antiquewhite; text-shadow: 7px 7px #000000; font-weight: bold;">Authors</h1>
+
+
+<button style="border-radius: 5px; text-align: center; background-color: antiquewhite; color: saddlebrown; font-size: 17px; width: 150px; height: 40px;">
+    <a asp-action="Create">Create New</a>
+</button>
+<table class="table" style="background-color:antiquewhite; padding-top:10px">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BirthDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nationality)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Gender)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BirthDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nationality)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Gender)
+            </td>
+            <td>
+                
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

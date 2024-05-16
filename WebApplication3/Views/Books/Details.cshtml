@@ -1,0 +1,116 @@
+﻿
+@model WebApplication3.Models.Book
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1 style="font-size: 50px; color: antiquewhite; text-shadow: 7px 7px #000000; font-weight: bold;">Details</h1>
+
+<div style="background-color:antiquewhite; padding:20px">
+    
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.YearPublished)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.YearPublished)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.NumPages)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.NumPages)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Publisher)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Publisher)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.FrontPage)
+        </dt>
+        <dd class = "col-sm-10">
+            <img src="@Model.FrontPage" alt="Book Front Page" style="width200px; height: 200px;">
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DownloadUrl)
+        </dt>
+
+        <dd class = "col-sm-10">
+            @if (User.Identity.IsAuthenticated)
+{
+                @Html.DisplayFor(model => model.DownloadUrl)
+            }
+            else
+            {
+               <p>Download not available! Register First.</p>
+            }
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Author)
+        </dt>
+        <dd class = "col-sm-10">
+            @if (Model.AuthorId != null)
+            {
+                <a asp-controller="Author" asp-action="Details" asp-route-id="@Model.AuthorId">@Html.DisplayFor(model => model.Author.FullName)</a>
+            }
+
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Genres)
+        </dt>
+        <dd class="col-sm-10">
+            @foreach (var actor in Model.Genres)
+            {
+                <a asp-controller="Genres" asp-action="Details" asp-route-id="@actor.GenreId">
+                    @actor.Genre.GenreName
+                </a> <br />
+            }
+        </dd>
+        <dt class="col-sm-2">
+            <p>Average Rating</p>
+        </dt>
+        <dd class="col-sm-10">
+          
+            @ViewBag.AverageRating
+        </dd>
+        <dt class="col-sm-2 ">
+            @Html.DisplayNameFor(model => model.Reviews)
+        </dt>
+        <dd class="col-sm-10">
+            @if (Model.Reviews != null)
+            {
+                @foreach (var review in Model.Reviews)
+                {
+                    <li class="comments">@review.AppUser : @review.Comment</li>
+                }
+            }
+        </dd>
+    </dl>
+</div>
+<div style ="background-color:antiquewhite; padding:20px">
+     |
+    <a asp-action="Index" style="border-radius: 5px; text-align: center; background-color: antiquewhite; color: saddlebrown; font-size: 17px; width: 150px; height: 40px;">Back to List</a>
+</div>
+@if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+{
+    <div class="card-body" style="border-radius: 5px; text-align: center; background-color: antiquewhite; color: saddlebrown; font-size: 17px; width: 150px; height: 40px; border-block:medium; margin-left:100px">
+        <a asp-action="Edit" asp-route-id="@Model?.Id" style="border-radius: 5px; text-align: center; background-color: antiquewhite; color: saddlebrown; font-size: 17px; width: 150px; height: 40px;">Edit</a>
+        <a asp-action="Delete" asp-route-id="@Model?.Id" style="border-radius: 5px; text-align: center; background-color: antiquewhite; color: saddlebrown; font-size: 17px; width: 150px; height: 40px;">Delete</a>
+    </div>
+}
