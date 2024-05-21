@@ -23,11 +23,11 @@ namespace WebApplication3.Models
         [StringLength(50)]
         public string? Publisher { get; set; }
 
-        [Url]
+        
         [DisplayName("Front Page")]
         public string? FrontPage { get; set; }
 
-        [Url]
+        
         [DisplayName("Download")]
         public string? DownloadUrl { get; set; }
 

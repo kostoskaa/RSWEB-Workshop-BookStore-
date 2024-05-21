@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebApplication3.Data;
 
@@ -11,9 +12,11 @@ using WebApplication3.Data;
 namespace WebApplication3.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240520203800_userbooks")]
+    partial class userbooks
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -253,7 +256,7 @@ namespace WebApplication3.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Author", (string)null);
+                    b.ToTable("Author");
                 });
 
             modelBuilder.Entity("WebApplication3.Models.Book", b =>
@@ -296,7 +299,7 @@ namespace WebApplication3.Migrations
 
                     b.HasIndex("AuthorId");
 
-                    b.ToTable("Book", (string)null);
+                    b.ToTable("Book");
                 });
 
             modelBuilder.Entity("WebApplication3.Models.BookGenre", b =>
@@ -319,7 +322,7 @@ namespace WebApplication3.Migrations
 
                     b.HasIndex("GenreId");
 
-                    b.ToTable("BookGenre", (string)null);
+                    b.ToTable("BookGenre");
                 });
 
             modelBuilder.Entity("WebApplication3.Models.Genre", b =>
@@ -336,7 +339,7 @@ namespace WebApplication3.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Genre", (string)null);
+                    b.ToTable("Genre");
                 });
 
             modelBuilder.Entity("WebApplication3.Models.Review", b =>
@@ -365,7 +368,7 @@ namespace WebApplication3.Migrations
 
                     b.HasIndex("BookId");
 
-                    b.ToTable("Review", (string)null);
+                    b.ToTable("Review");
                 });
 
             modelBuilder.Entity("WebApplication3.Models.UserBooks", b =>
@@ -392,7 +395,7 @@ namespace WebApplication3.Migrations
 
                     b.HasIndex("BookStoreUserId");
 
-                    b.ToTable("UserBooks", (string)null);
+                    b.ToTable("UserBooks");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

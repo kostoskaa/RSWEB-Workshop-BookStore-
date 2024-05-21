@@ -56,7 +56,15 @@
                 
             </ul>
             <div class="card-body" style="border-radius: 5px; text-align: center; background-color: antiquewhite; color: saddlebrown; font-size: 17px; width: 150px; height: 40px; border-block:medium; margin-left:100px">
-                <a asp-controller="Books" asp-action="Details" asp-route-id="@item.Id" >Details</a><br />
+                <form asp-action="Details" >
+                    <input type="hidden" name="id" value="@item.Id" />
+                    <button type="submit" style="border-radius: 5px; text-align: center; background-color: antiquewhite; color: saddlebrown; font-size: 17px; width: 100px; height: 30px;">Details</button>
+                </form>
+                
+                <form asp-action="BuyBook" method="post">
+                    <input type="hidden" name="id" value="@item.Id" />
+                    <button type="submit" style="border-radius: 5px; text-align: center; background-color: antiquewhite; color: saddlebrown; font-size: 17px; width: 100px; height: 30px;">Buy book</button>
+                </form>
             </div>
             
         </div>

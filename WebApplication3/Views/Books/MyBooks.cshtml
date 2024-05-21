@@ -1,0 +1,33 @@
+﻿@model IEnumerable<WebApplication3.Models.UserBooks>
+
+@{
+    ViewData["Title"] = "MyBooks";
+}
+
+<h1 style="font-size: 50px; color: antiquewhite; text-shadow: 7px 7px #000000; font-weight: bold;"> My Books</h1>
+
+
+<div class="book-container" style="display: grid;grid-template-columns: repeat(3, 1fr); gap: 20px;">
+    @foreach (var item in Model)
+    {
+        <div class="book-card" style="border: 1px solid #ccc;border-radius: 5px;padding: 20px;background-color: antiquewhite;">
+            <img class="card-img-top" src="@item.Book.FrontPage" alt="Card image cap" style="height: 200px; width: 200px;width: 100%;height: auto;border-radius: 5px;">
+            <div class="card-body">
+                <h5 class="card-title" style="font-size: 18px;margin-top: 10px;margin-bottom: 5px; align-self:center; text-align:center;">
+                    @item.Book.Title
+                </h5>
+            </div>
+            <ul class="list-group list-group-flush">
+                
+                
+                <li class="list-group-item" style="padding: 5px 0; background-color:antiquewhite; align-self:center">Published Year: @item.Book.YearPublished</li>
+
+            </ul>
+            <div class="card-body" style="border-radius: 5px; text-align: center; background-color: antiquewhite; color: saddlebrown; font-size: 17px; width: 150px; height: 40px; border-block:medium; margin-left:100px">
+                <a asp-controller="Books" asp-action="Details" asp-route-id="@item.Book.Id">Details</a><br />
+               
+            </div>
+
+        </div>
+    }
+</div>

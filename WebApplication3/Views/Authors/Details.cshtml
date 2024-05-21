@@ -55,11 +55,12 @@
 
 <div style="background-color:antiquewhite; padding:20px">
      <a asp-action="Index" style="border-radius: 5px; text-align: center; background-color: antiquewhite; color: saddlebrown; font-size: 17px; width: 150px; height: 40px;">Back to List</a>
+    @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+    {
+        <div class="card-body" style="border-radius: 5px; text-align: center; background-color: antiquewhite; color: saddlebrown; font-size: 17px; width: 150px; height: 40px; border-block:medium; margin-left:100px">
+            <a asp-action="Edit" asp-route-id="@Model?.Id" style="border-radius: 5px; text-align: center; background-color: antiquewhite; color: saddlebrown; font-size: 17px; width: 150px; height: 40px;">Edit</a>
+            <a asp-action="Delete" asp-route-id="@Model?.Id" style="border-radius: 5px; text-align: center; background-color: antiquewhite; color: saddlebrown; font-size: 17px; width: 150px; height: 40px;">Delete</a>
+        </div>
+    }
 </div>
-@if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
-{
-    <div class="card-body" style="border-radius: 5px; text-align: center; background-color: antiquewhite; color: saddlebrown; font-size: 17px; width: 150px; height: 40px; border-block:medium; margin-left:100px">
-        <a asp-action="Edit" asp-route-id="@Model?.Id" style="border-radius: 5px; text-align: center; background-color: antiquewhite; color: saddlebrown; font-size: 17px; width: 150px; height: 40px;">Edit</a>
-        <a asp-action="Delete" asp-route-id="@Model?.Id" style="border-radius: 5px; text-align: center; background-color: antiquewhite; color: saddlebrown; font-size: 17px; width: 150px; height: 40px;">Delete</a>
-    </div>
-}
+

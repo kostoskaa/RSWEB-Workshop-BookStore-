@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -59,14 +60,30 @@ namespace WebApplication3.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,BookId,AppUser,Comment,Rating")] Review review)
         {
-            if (ModelState.IsValid)
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.UserName == User.Identity.Name);
+            if (user == null)
             {
-                _context.Add(review);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return Challenge();
             }
-            ViewData["BookId"] = new SelectList(_context.Book, "Id", "Title", review.BookId);
-            return View(review);
+
+            var book = await _context.Book.FindAsync(review.BookId);
+            if (book == null)
+            {
+                return NotFound();
+            }
+
+            var reviewBook = new Review
+            {
+                AppUser = user.Email,
+                BookId = review.BookId,
+                Comment = review.Comment,
+                Rating = review.Rating,
+            };
+
+            _context.Review.Add(reviewBook);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("Details", "Books", new { id = review.BookId });
         }
 
         // GET: Reviews/Edit/5

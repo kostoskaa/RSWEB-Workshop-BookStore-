@@ -5,7 +5,7 @@ namespace WebApplication3.ViewModels
 {
     public class BookAuthorGenreViewModel
     {
-        public IList<Book> Books { get; set; }
+        public IEnumerable<Book> Books { get; set; }
         public SelectList Genres { get; set; }
         public string BookGenres { get; set; }
         public string SearchString { get; set; }
